@@ -1,4 +1,6 @@
 from openpyxl.styles import Border, Side, Alignment, Font
+import calendar
+from datetime import date
 
 def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
 
@@ -30,15 +32,16 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
       else:
         if colIni < col < colIni+4:
           cell.border = Border(right=mediumBorder, left=mediumBorder)
-      
+     
   cell=workSheet.cell(maxRow+1,colIni+2)
   cell.font=bold
+  workSheet.cell(maxRow+2,colIni+2).font = bold
 
 def CellMergeStyle(workSheet):
   for month in range(12):
         workSheet.merge_cells(start_row=5, end_row=5, start_column=5*month+2, end_column=5*month+3)
 
 def YearBorderStyle(workSheet):
-  DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-  for index, dayInMonth in enumerate(DAYS_IN_MONTH):
-    MonthBorderStyle(workSheet, 5*index+1, 5+dayInMonth)
+  for month in range(12):
+    days_month = calendar.monthrange(date.today().year, month+1)[1]
+    MonthBorderStyle(workSheet, 5*month+1, 5+days_month)

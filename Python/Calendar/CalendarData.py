@@ -1,6 +1,4 @@
-from openpyxl import Workbook
 import calendar
-import CalendarStyle
 from datetime import date
 
 def SetMonthValues(workSheet, month, year=date.today().year):
@@ -22,33 +20,25 @@ def SetMonthValues(workSheet, month, year=date.today().year):
         cell.value = row-5
       elif col==colIni+3 and row == 5:
         cell.value = "HOURS"
-  cell=workSheet.cell(maxRow+1,colIni+2,"TOTAL")
+  cell=workSheet.cell(maxRow+1,colIni+2,"HOURS")
+  cell=workSheet.cell(maxRow+2,colIni+2,"DAYS")
 
 def SetFunctionMonth(workSheet, month, year=date.today().year):
   col = (month)*5-1
   days_month = calendar.monthrange(year, month)[1]
   maxRow = 5 + days_month
 
-  InitialCell = ws.cell(6,col)
-  EndCell = ws.cell(maxRow,col)
+  InitialCell = workSheet.cell(6,col)
+  EndCell = workSheet.cell(maxRow,col)
 
-  workSheet.cell(maxRow+1,col,f"=SUM({InitialCell.coordinate}:{EndCell.coordinate})")
+  totalHourCell = workSheet.cell(maxRow+1,col,f"=SUM({InitialCell.coordinate}:{EndCell.coordinate})")
+  workSheet.cell(maxRow+2,col,f"={totalHourCell.coordinate}/{days_month}")
+
 
 def SetYearValues(workSheet):
   for month in range(1,13):
     #Set Values
     SetMonthValues(workSheet, month)
     #Set Functions
-    SetFunctionMonth(ws, month)
+    SetFunctionMonth(workSheet, month)
 
-wb = Workbook()
-ws = wb.active
-
-#Set Values and functions
-SetYearValues(ws)
-
-#Set Styles
-CalendarStyle.CellMergeStyle(ws)
-CalendarStyle.YearBorderStyle(ws)
-
-wb.save('Calendar.xlsx')
