@@ -32,7 +32,7 @@ def SetFunctionMonth(workSheet, month, year=date.today().year):
   EndCell = workSheet.cell(maxRow,col)
 
   totalHourCell = workSheet.cell(maxRow+1,col,f"=SUM({InitialCell.coordinate}:{EndCell.coordinate})")
-  workSheet.cell(maxRow+2,col,f"={totalHourCell.coordinate}/{days_month}")
+  workSheet.cell(maxRow+2,col,f"={totalHourCell.coordinate}/9")
 
 
 def SetYearValues(workSheet):

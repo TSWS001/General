@@ -15,6 +15,8 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
       
       if cell.value == "Sunday":
         cell.border = Border(bottom=doubleBorder, left=mediumBorder)
+      if col == colIni+3:
+        cell.alignment = Alignment(horizontal="center")
       
       if row==5:
         if col==colIni+1:
@@ -35,6 +37,8 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
      
   cell=workSheet.cell(maxRow+1,colIni+2)
   cell.font=bold
+  cell=workSheet.cell(maxRow+2,colIni+3)
+  cell.font=Font(bold=True)
   workSheet.cell(maxRow+2,colIni+2).font = bold
 
 def CellMergeStyle(workSheet):
