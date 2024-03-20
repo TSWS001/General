@@ -1,0 +1,40 @@
+git status --short
+/*
+Short status flags are:
+?? - Untracked files
+A - Files added to stage
+M - Modified files
+D - Deleted files
+*/
+
+git log --graph --decorate --oneline --all //all can be replace by a number
+git log "origin/master" //for example: info about branch origin/master
+// information about last commits
+
+git branch //view available branch, * means current branch, use -a for all branches
+git branch "branch-name" //create branch
+git branch -m "new-branch-name" //rename the current branch name.
+git branch -d branch-name //delete branch
+
+git checkout branch-name //move to the branch-name branch
+(using -b will create a new branch, if branch-name does not exists)
+
+git merge branch-name //bring changes from branch-name into current branch
+---------------------------
+	REPOSITORY REMOTE
+---------------------------
+git pull origin <remotename> <localname> //combination of fetch and merge:
+
+git fetch origin  //retrieve all the change history of a tracked branch/repo
+
+git remote -v , git remote show origin //for view the current defined remotes urls 
+	--> git remote set-url origin <new-url> //to modify both urls
+	    git remote set-url --push origin <new-url> // modify specific
+	    git remote get-url 
+
+if all the branches are set-upstream correctly: we can do "git push origin language" even the current
+checked out branch are not language:
+GENERAL FORM: git push <remote> <from_branch>[:to_branch], the content inside square bracket are optional,
+in terms of, when desired to push the local language to the remote language with the same branch name.
+TO CHECK THE SET-UPSTREAM BRANCHES: git branch -vv, git remote show origin
+https://stackoverflow.com/questions/5738797/how-can-i-push-a-local-git-branch-to-a-remote-with-a-different-name-easily
