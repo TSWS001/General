@@ -1,3 +1,5 @@
 IF pyintaller is not working as a 
 python -m PyInstaller --onefile -F main.py 
 
+when ps1 execution error:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
