@@ -1,0 +1,3 @@
+IF pyintaller is not working as a 
+python -m PyInstaller --onefile -F main.py 
+
