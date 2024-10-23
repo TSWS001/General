@@ -6,15 +6,13 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
 
   mediumBorder = Side(style = "medium", color='00000000')
   doubleBorder = Side(style = "dashDot", color='00000000')
-  bold = Font(name="Calibri",  color='FF0000', b=True)
+  redBold = Font(name="Calibri",  color='FF0000', b=True)
 
   for col in range(colIni,colIni+5):
     for row in range(5, maxRow+1):
       cell = workSheet.cell(row, col)
       cell.font = Font(name="Calibri",  color='000000')
       
-      if cell.value == "Sunday":
-        cell.border = Border(bottom=doubleBorder, left=mediumBorder)
       if col == colIni+3:
         cell.alignment = Alignment(horizontal="center")
       
@@ -22,7 +20,7 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
         if col==colIni+1:
           cell.border = Border(top = mediumBorder, left=mediumBorder, bottom=mediumBorder)
           cell.alignment = Alignment(horizontal="center")
-          cell.font=bold
+          cell.font=redBold
         elif col==colIni+2:
           cell.border = Border(top = mediumBorder, right=mediumBorder, bottom=mediumBorder)
         elif col==colIni+3:
@@ -34,12 +32,15 @@ def MonthBorderStyle(workSheet, colIni=1, maxRow=37):
       else:
         if colIni < col < colIni+4:
           cell.border = Border(right=mediumBorder, left=mediumBorder)
+      
+      if cell.value == "Sunday" and row!=maxRow:
+        cell.border = Border(bottom=doubleBorder, left=mediumBorder)
      
-  cell=workSheet.cell(maxRow+1,colIni+2)
-  cell.font=bold
+  cell=workSheet.cell(maxRow+1,colIni+2).font=redBold
   cell=workSheet.cell(maxRow+2,colIni+3)
   cell.font=Font(bold=True)
-  workSheet.cell(maxRow+2,colIni+2).font = bold
+  workSheet.cell(maxRow+2,colIni+2).font = redBold
+  workSheet.cell(maxRow+4,colIni+2).font = redBold
 
 def CellMergeStyle(workSheet):
   for month in range(12):
